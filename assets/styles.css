@@ -1,0 +1,29 @@
+body{
+    font-family: Roboto;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    width: 100%;
+    background-color: #35454c;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 1vw;
+    margin: 0;
+}
+
+.header-content{
+    max-width: 1200px;
+}

@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KCET Cutoff</title>
+    <title>KCET Cutoffs</title>
     <link href="assets/styles.css" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
     <script src="assets/styles.css" defer></script>
 </head>
 <body>
     <header>
-        <h1>KCET Cutoffs</h1>
-        <p>KCET previous years College-wise Rank Cutoffs</p>
+        <div class="header-content">
+            <h1>KCET Cutoffs</h1>
+            <p>KCET previous years College-wise Rank Cutoffs</p>
+        </div>
     </header>
 
-    <div class="search-container">
+    <div id="search-container">
         <div class="input-group">
             <label for="yearSelect">Year</label>
             <select id="yearSelect">
@@ -22,7 +25,7 @@
                 <option value="2024">2024</option>
             </select>
 
-            <label for"roundSelect">Round</label>
+            <label for="roundSelect">Round</label>
             <select id="roundSelect">
                 <option value="roundBlank">Choose round</option>
                 <option value="round1">Round 1</option>
@@ -30,9 +33,9 @@
                 <option value="round3">Round 3</option>
             </select>
             
-            <label for="courseSelect">Course</label>
-            <select id="courseSelect">
-                <option value="courseBlank">Choose Course</option>
+            <label for="professionSelect">Profession</label>
+            <select id="professionSelect">
+                <option value="courseBlank">Choose Profession</option>
                 <option value="Yoga & Naturopathy">Yoga & Naturopathy</option>
                 <option value="Architecture">Architecture</option>
                 <option value="Engineering">Engineering</option>
@@ -60,9 +63,30 @@
                 <option value="NHK">Rest of Karnataka (NHK)</option>
             </select>
 
-            <button id="searchBtn">Search</button>
+            <button id="fetchDataBtn">Search</button>
         </div>
     </div>
+
+    <div id="result">
+        <aside class="side-filter">
+
+        </aside>
+
+        <main class="result-tab">
+            <div class="instant-search-container">
+                <input type="text" id="instantSearchBar" placeholder="Search for college or course...">
+            </div>
+
+            <div class=""resultsContainer">
+            
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>&#169; 2026 KCET Cutoff. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>
 
