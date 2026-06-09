@@ -8,22 +8,56 @@ body{
     width: 100%;
 }
 
+* {
+  outline: 1px solid red;
+}
+
 h1, h2, h3, h4, h5, h6, p{
     margin: 0;
     padding: 0;
 }
 
 header{
-    width: 100%;
     background-color: #35454c;
     color: white;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    padding: 1vw;
     margin: 0;
+    box-sizing: border-box;
 }
 
+logo{
+    font-weight: bold;
+    
+
+}
 .header-content{
     max-width: 1200px;
+}
+
+header, #search-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 1vw;
+}
+
+#result-container{
+    display: flex;
+}
+
+.side-filter{
+    width: 15%;
+    padding: 0.5vw;
+}
+
+.result-tab{
+    flex-grow: 2;
+    display: flex;
+    box-sizing: border-box;
+}
+
+#instantSearchBar{
+    text-align: center;
+    width: 40%;
+    height: 25px;
 }
