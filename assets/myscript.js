@@ -15,30 +15,33 @@ fetchDataBtn.addEventListener("click", async() => {
 
     const fileName = `assets/kcet_data/${year}/${round}.json`;
 
-    console.log(fileName);
+    searchResultContainer.style.display = 'flex';
+    
+    resultsContainer.innerHTML = '<div class="loader"></div>';
+    
+    checkboxesContainer.innerHTML = '';
 
     try { 
         const response = await fetch(fileName);
     
-    if(!response.ok) {
-        throw new Error('Server says: ${response.status}')
-    }
+        if(!response.ok) {
+            throw new Error(`Server says: ${response.status}`);
+        }
 
+        allData = await response.json();
+        
+        primaryContainerData = allData.filter(item => {
+            const matchProfession = item.Profession === profession;
+            const matchRegion = region === 'regionBlank' ? true : item.Region === region;
+            return matchProfession && matchRegion;
+        });
+        
+        generateCourseCheckboxes(primaryContainerData);
+        renderResults(primaryContainerData);
 
-    allData = await response.json();
-    console.log("Success! Here is the data:", allData);
-
-    primaryContainerData = allData.filter(item => {
-        const matchProfession = item.Profession === profession;
-        const matchRegion = region === 'all' ? true : item.Region === region;
-        return matchProfession && matchRegion;
-    });
-    searchResultContainer.style.display = 'flex';
-    generateCourseCheckboxes(primaryContainerData);
-    renderResults(primaryContainerData);
     } catch (error) {
         console.error("Error loading file:", error);
-        resultsContainer.innerHTML = `<p style="color:red;">Sorry, the data for ${year} Round ${round} is not available yet.</p>`;
+        resultsContainer.innerHTML = `<p class="no-results" style="color:red;">Sorry, the data for ${year} Round ${round} is not available yet.</p>`;
     }
 });
 
