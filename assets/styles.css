@@ -1,59 +1,282 @@
+/* =========================================
+   BASE RESET & TYPOGRAPHY
+========================================= */
 body {
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     min-height: 100vh;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    background-color: #f8f9fa; /* Light background makes white cards pop */
+    color: #333;
 }
 
-
-h1, h2, h3, h4, h5, h6, p{
+h1, h2, h3, h4, h5, h6, p {
     margin: 0;
     padding: 0;
 }
 
-header{
+/* =========================================
+   HEADER
+========================================= */
+header {
     background-color: #35454c;
     color: white;
-    text-align: center;
-    margin: 0;
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    padding: 20px 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-logo{
+.header-content {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.header-content logo {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* =========================================
+   TOP SEARCH CONTROLS (Year, Round, etc.)
+========================================= */
+#search-container {
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    max-width: 1200px;
+    width: 100%;
+    justify-content: center;
+}
+
+.input-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.input-group select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #fff;
+    outline: none;
+}
+
+.input-group select:focus {
+    border-color: #0d47a1;
+}
+
+#fetchDataBtn {
+    background-color: #0d47a1;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+#fetchDataBtn:hover {
+    background-color: #08306b;
+}
+
+/* =========================================
+   MAIN LAYOUT (Hidden by default in JS)
+========================================= */
+#searchResultContainer {
+    /* JS sets this to 'flex' when search is clicked */
+    display: none; 
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+    gap: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+/* =========================================
+   SIDEBAR (Course Filters)
+========================================= */
+.side-filter {
+    width: 250px; /* Fixed width for desktop */
+    flex-shrink: 0;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+
+.side-filter h3 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+.checkbox-wrapper {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.checkbox-wrapper label {
+    font-size: 0.9rem;
+    color: #555;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+/* =========================================
+   RESULTS AREA & INSTANT SEARCH
+========================================= */
+.result-tab {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Prevents flexbox overflow */
+}
+
+.instant-search-container {
+    margin-bottom: 20px;
+}
+
+#instantSearchBar {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#instantSearchBar:focus {
+    border-color: #0d47a1;
+}
+
+/* Container holding all the cards */
+#resultsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* =========================================
+   RESULT CARDS (Your previous styles)
+========================================= */
+.result-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.result-card h3 {
+    margin: 0 0 8px 0;
+    color: #222;
+    font-size: 1.25rem;
+}
+
+.course-title {
+    margin: 0 0 15px 0;
+    color: #555;
+    font-weight: 500;
+}
+
+.region-tag {
+    font-size: 0.8em;
+    color: #555;
+    background-color: #e9ecef;
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
     font-weight: bold;
 }
 
-.header-content{
-    max-width: 1200px;
-}
-
-header, #search-container{
+.ranks-container {
     display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 1vw;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-#result-container{
-    display: flex;
+.rank-badge {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    border: 1px solid #bbdefb;
 }
 
-.side-filter{
-    width: 15%;
-    padding: 0.5vw;
-}
-
-.result-tab{
-    flex-grow: 2;
-    display: flex;
-    box-sizing: border-box;
-}
-
-#instantSearchBar{
+.no-results {
     text-align: center;
-    width: 40%;
-    height: 25px;
+    color: #d32f2f;
+    font-weight: bold;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (Mobile & Tablet)
+========================================= */
+@media (max-width: 768px) {
+    /* Stack dropdowns vertically on mobile */
+    .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-group label {
+        margin-bottom: -5px; /* Pull label closer to its input */
+    }
+
+    /* Stack sidebar and results vertically */
+    #searchResultContainer {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Sidebar takes full width on mobile */
+    .side-filter {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
