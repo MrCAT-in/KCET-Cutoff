@@ -6,7 +6,7 @@
     <title>KCET Cutoffs</title>
     <link href="assets/styles.css" rel="stylesheet">
     <link href="https://googleapis.com" rel="stylesheet">
-    <script src="assets/styles.css" defer></script>
+    <script src="assets/myscript.js" defer></script>
 </head>
 <body>
     <header>
@@ -67,9 +67,10 @@
         </div>
     </div>
 
-    <div id="result-container">
+    <div id="searchResultContainer">
         <aside class="side-filter">
-            <p>Sort by</p>
+            <h3>Filter by Courses</h3>
+            <div id="courseCheckboxesContainer"></div>
         </aside>
 
         <main class="result-tab">
@@ -77,7 +78,7 @@
                 <input type="text" id="instantSearchBar" placeholder="Search for college or course...">
             </div>
 
-            <div class=""resultsContainer">
+            <div id=""resultsContainer">
             
             </div>
         </main>

@@ -1,4 +1,4 @@
-body{
+body {
     font-family: Roboto;
     min-height: 100vh;
     margin: 0;
@@ -27,9 +27,8 @@ header{
 
 logo{
     font-weight: bold;
-    
-
 }
+
 .header-content{
     max-width: 1200px;
 }
