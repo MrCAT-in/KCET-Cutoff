@@ -107,8 +107,8 @@ function renderResults(data) {
         const excludeKeys = ['College', 'Course', 'Region', 'Profession', 'Source_File'];
         
         for (const [key, value] of Object.entries(item)) {
-            if (!excludeKeys.includes(key)) {
-                // Generates a tiny badge for each cast/rank
+            if (!excludeKeys.includes(key) && value !== null && value !== "") {
+                
                 ranksHtml += `<span class="rank-badge"><strong>${key}:</strong> ${value}</span> `;
             }
         }
