@@ -288,27 +288,22 @@ header {
     font-weight: bold;
     display: inline-block; 
 }
-
 .ranks-container {
     display: flex;
-    flex-wrap: nowrap; 
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
     width: 100%;
     max-width: 100%;
-    overflow-x: auto; 
-    padding-bottom: 10px; 
-    -webkit-overflow-scrolling: touch; 
 }
 
 .rank-badge {
-    flex-shrink: 0;
     background-color: #e3f2fd;
     color: #0d47a1;
     padding: 6px 12px;
     border-radius: 6px;
     font-size: 0.9rem;
     border: 1px solid #bbdefb;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
 
 .no-results {
