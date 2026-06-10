@@ -4,7 +4,7 @@ let primaryContainerData = [];
 const fetchDataBtn = document.getElementById("fetchDataBtn");
 const searchResultContainer = document.getElementById("searchResultContainer");
 const resultsContainer = document.getElementById("resultsContainer");
-const courseCheckboxesContainer = document.getElementById("courseCheckboxesContainer");
+const checkboxesContainer = document.getElementById("courseCheckboxesContainer");
 const instantSearchBar = document.getElementById("instantSearchBar");
 
 fetchDataBtn.addEventListener("click", async() => {
@@ -72,21 +72,20 @@ function generateCourseCheckboxes(data) {
 instantSearchBar.addEventListener('input', applySecondaryFilters);
 
 function applySecondaryFilters() {
+
     const searchTerm = instantSearchBar.value.toLowerCase();
 
     const checkedBoxes = Array.from(document.querySelectorAll('.course-checkbox:checked')).map(cb => cb.value);
 
-    const finalData = primaryFilteredData.filter(item => {
+    const finalData = primaryContainerData.filter(item => {
 
         const textMatch = item.College.toLowerCase().includes(searchTerm) || 
                           item.Course.toLowerCase().includes(searchTerm);
-
 
         const checkboxMatch = checkedBoxes.length === 0 ? true : checkedBoxes.includes(item.Course);
 
         return textMatch && checkboxMatch;
     });
-
 
     renderResults(finalData);
 }
