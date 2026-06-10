@@ -1,15 +1,23 @@
 /* =========================================
    BASE RESET & TYPOGRAPHY
 ========================================= */
-body {
+/* 1. Universal Box Sizing prevents padding from expanding element widths */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* 2. Lock html and body width to prevent the 'shrunk' zoom-out bug */
+html, body {
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    background-color: #f8f9fa; /* Light background makes white cards pop */
+    background-color: #f8f9fa;
     color: #333;
+    max-width: 100vw;
+    overflow-x: hidden; 
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -25,8 +33,9 @@ header {
     color: white;
     display: flex;
     justify-content: center;
-    padding: 20px 15px;
+    padding: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
 }
 
 .header-content {
@@ -37,13 +46,13 @@ header {
 
 .header-content logo {
     display: block;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 /* =========================================
-   TOP SEARCH CONTROLS (Year, Round, etc.)
+   TOP SEARCH CONTROLS
 ========================================= */
 #search-container {
     background-color: white;
@@ -51,6 +60,7 @@ header {
     padding: 20px 15px;
     display: flex;
     justify-content: center;
+    width: 100%;
 }
 
 .input-group {
@@ -70,12 +80,18 @@ header {
 }
 
 .input-group select {
-    padding: 8px 12px;
+    padding: 10px 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     background-color: #fff;
     outline: none;
+    
+    /* 3. CRITICAL: Prevents long text from breaking mobile width */
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; 
 }
 
 .input-group select:focus {
@@ -88,7 +104,7 @@ header {
     border: none;
     padding: 10px 24px;
     font-size: 1rem;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.2s ease;
@@ -99,36 +115,15 @@ header {
 }
 
 /* =========================================
-   LOADING SPINNER
-========================================= */
-.loader {
-    border: 5px solid #f3f3f3; /* Light grey background */
-    border-top: 5px solid #0d47a1; /* Blue spinning accent */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 40px auto; /* Centers the spinner */
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-/* =========================================
    MAIN LAYOUT (Hidden by default in JS)
 ========================================= */
 #searchResultContainer {
-    /* JS sets this to 'flex' when search is clicked */
     display: none; 
     max-width: 1200px;
     margin: 20px auto;
     padding: 0 15px;
-    gap: 25px;
+    gap: 20px;
     width: 100%;
-    box-sizing: border-box;
     align-items: flex-start;
 }
 
@@ -136,7 +131,7 @@ header {
    SIDEBAR (Course Filters)
 ========================================= */
 .side-filter {
-    width: 250px; /* Fixed width for desktop */
+    width: 250px;
     flex-shrink: 0;
     background: white;
     padding: 20px;
@@ -154,14 +149,14 @@ header {
 }
 
 .checkbox-wrapper {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
 }
 
 .checkbox-wrapper label {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #555;
     cursor: pointer;
     line-height: 1.4;
@@ -174,7 +169,7 @@ header {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    min-width: 0; /* Prevents flexbox overflow */
+    min-width: 0; 
 }
 
 .instant-search-container {
@@ -183,11 +178,10 @@ header {
 
 #instantSearchBar {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 15px;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 6px;
-    box-sizing: border-box;
     box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     outline: none;
     transition: border-color 0.2s;
@@ -197,15 +191,15 @@ header {
     border-color: #0d47a1;
 }
 
-/* Container holding all the cards */
 #resultsContainer {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 100%;
 }
 
 /* =========================================
-   RESULT CARDS (Your previous styles)
+   RESULT CARDS
 ========================================= */
 .result-card {
     background-color: #ffffff;
@@ -218,23 +212,26 @@ header {
 .result-card h3 {
     margin: 0 0 8px 0;
     color: #222;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+    line-height: 1.3;
 }
 
 .course-title {
     margin: 0 0 15px 0;
     color: #555;
     font-weight: 500;
+    line-height: 1.4;
 }
 
 .region-tag {
-    font-size: 0.8em;
+    font-size: 0.85em;
     color: #555;
     background-color: #e9ecef;
     padding: 3px 8px;
     border-radius: 12px;
-    margin-left: 8px;
+    margin-left: 6px;
     font-weight: bold;
+    display: inline-block; /* Prevents awkward wrapping */
 }
 
 .ranks-container {
@@ -246,7 +243,7 @@ header {
 .rank-badge {
     background-color: #e3f2fd;
     color: #0d47a1;
-    padding: 5px 10px;
+    padding: 6px 12px;
     border-radius: 6px;
     font-size: 0.9rem;
     border: 1px solid #bbdefb;
@@ -263,8 +260,23 @@ header {
 }
 
 /* =========================================
-   FOOTER
+   LOADING SPINNER
 ========================================= */
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #0d47a1;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 footer {
     margin-top: auto;
     text-align: center;
@@ -274,28 +286,40 @@ footer {
 }
 
 /* =========================================
-   RESPONSIVE DESIGN (Mobile & Tablet)
+   MOBILE-SPECIFIC OVERRIDES (Smartphones)
 ========================================= */
 @media (max-width: 768px) {
-    /* Stack dropdowns vertically on mobile */
+    /* Stack dropdowns to fill width */
     .input-group {
         flex-direction: column;
         align-items: stretch;
+        gap: 12px;
     }
 
     .input-group label {
-        margin-bottom: -5px; /* Pull label closer to its input */
+        margin-bottom: -8px; /* Tucks label closer to input */
     }
 
-    /* Stack sidebar and results vertically */
+    /* Make touch targets at least 44px tall for thumbs */
+    .input-group select,
+    #fetchDataBtn,
+    #instantSearchBar {
+        height: 48px; 
+    }
+
+    /* Stack sidebar on top of results */
     #searchResultContainer {
         flex-direction: column;
-        gap: 15px;
     }
 
-    /* Sidebar takes full width on mobile */
+    /* Side filter takes full width */
     .side-filter {
         width: 100%;
-        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    /* Ensure cards don't break padding */
+    .result-card {
+        padding: 15px;
     }
 }
