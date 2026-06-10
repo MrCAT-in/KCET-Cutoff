@@ -163,6 +163,35 @@ header {
 }
 
 /* =========================================
+   SCROLLABLE CHECKBOX CONTAINER
+========================================= */
+#courseCheckboxesContainer {
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* Optional: Make the scrollbar look sleek and modern (Webkit browsers) */
+#courseCheckboxesContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+#courseCheckboxesContainer::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+#courseCheckboxesContainer::-webkit-scrollbar-thumb {
+    background: #cdd2d6;
+    border-radius: 4px;
+}
+
+#courseCheckboxesContainer::-webkit-scrollbar-thumb:hover {
+    background: #a0aab2;
+}
+
+/* =========================================
    RESULTS AREA & INSTANT SEARCH
 ========================================= */
 .result-tab {
