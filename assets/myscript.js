@@ -6,19 +6,22 @@ const searchResultContainer = document.getElementById("searchResultContainer");
 const resultsContainer = document.getElementById("resultsContainer");
 const checkboxesContainer = document.getElementById("courseCheckboxesContainer");
 const instantSearchBar = document.getElementById("instantSearchBar");
+const professionSelect = document.getElementById("professionSelect");
+const professionName = professionSelect.options[professionSelect.selectedIndex].text;
 
 fetchDataBtn.addEventListener("click", async() => {
     const year = document.getElementById("yearSelect").value;
     const round = document.getElementById("roundSelect").value;
-    const profession = document.getElementById("professionSelect").value;
+    // This now pulls the clean file name (e.g., "engineering") from the HTML value
+    const profession = document.getElementById("professionSelect").value; 
     const region = document.getElementById("regionSelect").value;
 
-    const fileName = `assets/kcet_data/${year}/${round}.json`;
+    // NEW PATH: Incorporates the profession directly into the URL
+    // Note: We use relative paths ('assets/...') so it works on GitHub Pages!
+    const fileName = `assets/kcet_data/${year}/${round}/${profession}.json`;
 
     searchResultContainer.style.display = 'flex';
-    
     resultsContainer.innerHTML = '<div class="loader"></div>';
-    
     checkboxesContainer.innerHTML = '';
 
     try { 
@@ -31,9 +34,7 @@ fetchDataBtn.addEventListener("click", async() => {
         allData = await response.json();
         
         primaryContainerData = allData.filter(item => {
-            const matchProfession = item.Profession === profession;
-            const matchRegion = region === 'regionBlank' ? true : item.Region === region;
-            return matchProfession && matchRegion;
+            return region === 'regionBlank' ? true : item.Region === region;
         });
         
         generateCourseCheckboxes(primaryContainerData);
@@ -41,9 +42,20 @@ fetchDataBtn.addEventListener("click", async() => {
 
     } catch (error) {
         console.error("Error loading file:", error);
-        resultsContainer.innerHTML = `<p class="no-results" style="color:red;">Sorry, the data for ${year} Round ${round} is not available yet.</p>`;
+        
+        // Stop the loader
+        resultsContainer.innerHTML = ''; 
+        
+        // Inject the custom KEA missing data message
+        resultsContainer.innerHTML = `
+            <div class="result-card" style="text-align: center; padding: 40px 20px;">
+                <h3 style="color: #d32f2f; margin-bottom: 10px;">Data Unavailable</h3>
+                <p style="color: #555; font-size: 1.1rem; line-height: 1.5;">
+                    The <strong>${professionName}</strong> cutoff data for <strong>${year} Round ${round}</strong> is missing or currently unavailable on the official KEA website.
+                </p>
+            </div>
+        `;
     }
-});
 
 function generateCourseCheckboxes(data) {
     const uniqueCourses = [...new Set(data.map(item => item.Course))].sort();
