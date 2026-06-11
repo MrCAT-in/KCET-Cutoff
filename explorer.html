@@ -75,7 +75,17 @@
     <div id="searchResultContainer">
         <aside class="side-filter">
             <h3>Filter by Courses</h3>
-            <div id="courseCheckboxesContainer"></div>
+            <div id="courseCheckboxesContainer" class="filter-scroll-box"></div>
+
+            <h3>Filter by Category</h3>
+            <div id="categoryCheckboxesContainer" class="filter-scroll-box"></div>
+
+            <h3>Filter by Rank</h3>
+            <div class="rank-filter-container">
+                <input type="number" id="minRankInput" placeholder="Min Rank">
+                <span class="rank-separator">-</span>
+                <input type="number" id="maxRankInput" placeholder="Max Rank">
+            </div>
         </aside>
 
         <main class="result-tab">
