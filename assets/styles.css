@@ -227,6 +227,25 @@ header {
     font-weight: bold;
 }
 
+.clear-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #ffffff;
+    color: #d32f2f; /* Red text to indicate a reset action */
+    border: 1px solid #d32f2f;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clear-btn:hover {
+    background-color: #d32f2f;
+    color: #ffffff; /* Fills in red when hovered */
+}
+
 /* =========================================
    SCROLLABLE CHECKBOX CONTAINER
 ========================================= */
