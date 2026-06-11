@@ -182,6 +182,52 @@ header {
 }
 
 /* =========================================
+   SIDEBAR FILTERS (Scroll & Layout)
+========================================= */
+.filter-scroll-box {
+    max-height: 250px; 
+    overflow-y: auto;  
+    padding-right: 10px; 
+    margin-bottom: 25px; /* Adds space before the next filter block */
+}
+
+/* Custom Webkit Scrollbars for the checklists */
+.filter-scroll-box::-webkit-scrollbar { width: 6px; }
+.filter-scroll-box::-webkit-scrollbar-track { background: #f8f9fa; border-radius: 4px; }
+.filter-scroll-box::-webkit-scrollbar-thumb { background: #cdd2d6; border-radius: 4px; }
+.filter-scroll-box::-webkit-scrollbar-thumb:hover { background: #a0aab2; }
+
+/* =========================================
+   RANK FILTER INPUTS
+========================================= */
+.rank-filter-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.rank-filter-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.rank-filter-container input:focus {
+    border-color: #0d47a1;
+}
+
+.rank-separator {
+    color: #555;
+    font-weight: bold;
+}
+
+/* =========================================
    SCROLLABLE CHECKBOX CONTAINER
 ========================================= */
 #courseCheckboxesContainer {
