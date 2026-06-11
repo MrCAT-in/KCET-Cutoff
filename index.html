@@ -3,91 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KCET Cutoffs</title>
+    <title>KCET Cutoffs - Home</title>
     <link href="assets/styles.css" rel="stylesheet">
-    <link href="https://googleapis.com" rel="stylesheet">
-    <script src="assets/myscript.js" defer></script>
 </head>
 <body>
     <header>
         <div class="header-content">
             <logo>KCET Cutoffs</logo>
-            <p>KCET previous years College-wise Rank Cutoffs</p>
         </div>
     </header>
 
-    <div id="search-container">
-        <div class="input-group">
-            <label for="yearSelect">Year</label>
-            <select id="yearSelect">
-                <option value="yearBlank">Choose Year</option>
-                <option value="2025">2025</option>
-                <option value="2024">2024</option>
-            </select>
+    <nav class="top-nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="explorer.html">Cutoff Explorer</a>
+    </nav>
 
-            <label for="roundSelect">Round</label>
-            <select id="roundSelect">
-                <option value="roundBlank">Choose round</option>
-                <option value="round1">Round 1</option>
-                <option value="round2">Round 2</option>
-                <option value="round3">Round 3</option>
-            </select>
-            
-            <label for="professionSelect">Profession</label>
-            <select id="professionSelect">
-                <option value="courseBlank">Choose Profession</option>
-                <option value="Agricultural_Engineering">Agri Engineering (Theory)</option>
-                <option value="Agricultural_EngineeringPract">Agri Engineering (Practical)</option>
-                <option value="AgriBScTheory">Agri Science (Theory)</option>
-                <option value="AgriculturePract">Agri Science (Practical)</option>
-                <option value="Architecture">Architecture</option>
-                <option value="B-Pharma">B-Pharma</option>
-                <option value="BSc_AHS">B.Sc. AHS</option>
-                <option value="BSc_Nursing">B.Sc. Nursing</option>
-                <option value="BPO">BPO</option>
-                <option value="BPT">BPT</option>
-                <option value="Engineering">Engineering</option>
-                <option value="Food_SciTheory">Food & Fisheries (Theory)</option>
-                <option value="Food_SciPract">Food & Fisheries (Practical)</option>
-                <option value="Medical_Record_Technology">Medical Record Tech</option>
-                <option value="Naturopathy__Yoga">Naturopathy & Yoga</option>
-                <option value="Pharm-D">Pharm-D</option>
-                <option value="Veter_SciTheory">Veterinary Science (Theory)</option>
-                <option value="Veter_SciPract">Veterinary Science (Practical)</option>
-            </select>
+    <main class="home-container">
+        <section class="card welcome-section">
+            <h2>Welcome to KCET Cutoffs</h2>
+            <p>A simple and fast platform built to help KCET students explore previous year cutoff ranks, compare colleges, and make better counselling decisions.</p>
+            <p>Whether you're searching for engineering college cutoffs, branch-wise ranks, or category-wise closing ranks, this website is designed to make the information easy to access and understand.</p>
+            <a href="explorer.html" class="cta-button">Start Searching Ranks</a>
+        </section>
 
-            <label for="regionSelect">Region</label>
-            <select id="regionSelect">
-                <option value="regionBlank">Choose Region</option>
-                <option value="HK">Kalyana Karnataka (HK)</option>
-                <option value="NHK">Rest of Karnataka (NHK)</option>
-            </select>
+        <section class="card about-section">
+            <h2>About This Site</h2>
+            <p>KCET Cutoffs provides organized cutoff rank data collected from officially published KEA counselling information. The goal of this website is to help students quickly search and analyze cutoff trends from previous years and upcoming counselling rounds.</p>
+            <h3>Features include:</h3>
+            <ul>
+                <li>Previous year KCET cutoff ranks</li>
+                <li>College and branch-wise filtering</li>
+                <li>Category-wise cutoff comparison</li>
+                <li>Easy mobile-friendly access</li>
+                <li>Fast search and navigation</li>
+            </ul>
+            <p>This platform is independently created to simplify KCET counselling research for students and parents.</p>
+        </section>
 
-            <button id="fetchDataBtn">Search</button>
-        </div>
-    </div>
+        <section class="card disclaimer-section">
+            <h2>Disclaimer</h2>
+            <p>The cutoff data available on this website is parsed and organized from publicly available information published by the Karnataka Examinations Authority (KEA). While every effort is made to ensure the data is accurate and up to date, mistakes, omissions, or parsing errors may still occur.</p>
+            <p><strong>Users are strongly advised to verify all information from the official KEA website before making any admission or counselling decisions.</strong></p>
+            <p>This website is not affiliated with, endorsed by, or officially connected to KEA or any government authority. The site owner shall not be held responsible for any loss, confusion, or decisions made based on the information provided here.</p>
+        </section>
+    </main>
 
-    <div id="searchResultContainer">
-        <aside class="side-filter">
-            <h3>Filter by Courses</h3>
-            <div id="courseCheckboxesContainer"></div>
-        </aside>
-
-        <main class="result-tab">
-            <div class="instant-search-container">
-                <input type="text" id="instantSearchBar" placeholder="Search for college, course or city...">
-            </div>
-
-            <div id="resultsContainer">
-            
-            </div>
-        </main>
-    </div>
-    
     <footer>
         <p>&#169; 2026 KCET Cutoff. All rights reserved.</p>
     </footer>
-
 </body>
 </html>
-

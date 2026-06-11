@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KCET Cutoffs</title>
+    <link href="assets/styles.css" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="assets/myscript.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <logo>KCET Cutoffs</logo>
+            <p>KCET previous years College-wise Rank Cutoffs</p>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="explorer.html" class="active">Cutoff Explorer</a>
+    </nav>
+
+    <div id="search-container">
+        <div class="input-group">
+            <label for="yearSelect">Year</label>
+            <select id="yearSelect">
+                <option value="yearBlank">Choose Year</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+            </select>
+
+            <label for="roundSelect">Round</label>
+            <select id="roundSelect">
+                <option value="roundBlank">Choose round</option>
+                <option value="round1">Round 1</option>
+                <option value="round2">Round 2</option>
+                <option value="round3">Round 3</option>
+            </select>
+            
+            <label for="professionSelect">Profession</label>
+            <select id="professionSelect">
+                <option value="courseBlank">Choose Profession</option>
+                <option value="Agricultural_Engineering">Agri Engineering (Theory)</option>
+                <option value="Agricultural_EngineeringPract">Agri Engineering (Practical)</option>
+                <option value="AgriBScTheory">Agri Science (Theory)</option>
+                <option value="AgriculturePract">Agri Science (Practical)</option>
+                <option value="Architecture">Architecture</option>
+                <option value="B-Pharma">B-Pharma</option>
+                <option value="BSc_AHS">B.Sc. AHS</option>
+                <option value="BSc_Nursing">B.Sc. Nursing</option>
+                <option value="BPO">BPO</option>
+                <option value="BPT">BPT</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Food_SciTheory">Food & Fisheries (Theory)</option>
+                <option value="Food_SciPract">Food & Fisheries (Practical)</option>
+                <option value="Medical_Record_Technology">Medical Record Tech</option>
+                <option value="Naturopathy__Yoga">Naturopathy & Yoga</option>
+                <option value="Pharm-D">Pharm-D</option>
+                <option value="Veter_SciTheory">Veterinary Science (Theory)</option>
+                <option value="Veter_SciPract">Veterinary Science (Practical)</option>
+            </select>
+
+            <label for="regionSelect">Region</label>
+            <select id="regionSelect">
+                <option value="regionBlank">Choose Region</option>
+                <option value="HK">Kalyana Karnataka (HK)</option>
+                <option value="NHK">Rest of Karnataka (NHK)</option>
+            </select>
+
+            <button id="fetchDataBtn">Search</button>
+        </div>
+    </div>
+
+    <div id="searchResultContainer">
+        <aside class="side-filter">
+            <h3>Filter by Courses</h3>
+            <div id="courseCheckboxesContainer"></div>
+        </aside>
+
+        <main class="result-tab">
+            <div class="instant-search-container">
+                <input type="text" id="instantSearchBar" placeholder="Search for college, course or city...">
+            </div>
+
+            <div id="resultsContainer">
+            
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <p>&#169; 2026 KCET Cutoff. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
+
