@@ -56,6 +56,9 @@ fetchDataBtn.addEventListener("click", async() => {
             </div>
         `;
     }
+});
+
+
 
 function generateCourseCheckboxes(data) {
     const uniqueCourses = [...new Set(data.map(item => item.Course))].sort();
