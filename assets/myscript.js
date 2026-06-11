@@ -6,8 +6,8 @@ const searchResultContainer = document.getElementById("searchResultContainer");
 const resultsContainer = document.getElementById("resultsContainer");
 const checkboxesContainer = document.getElementById("courseCheckboxesContainer");
 const instantSearchBar = document.getElementById("instantSearchBar");
-const professionSelect = document.getElementById("professionSelect");
-const professionName = professionSelect.options[professionSelect.selectedIndex].text;
+
+
 
 fetchDataBtn.addEventListener("click", async() => {
     const year = document.getElementById("yearSelect").value;
@@ -15,6 +15,8 @@ fetchDataBtn.addEventListener("click", async() => {
     // This now pulls the clean file name (e.g., "engineering") from the HTML value
     const profession = document.getElementById("professionSelect").value; 
     const region = document.getElementById("regionSelect").value;
+    const professionSelect = document.getElementById("professionSelect");
+    const professionName = professionSelect.options[professionSelect.selectedIndex].text;
 
     // NEW PATH: Incorporates the profession directly into the URL
     // Note: We use relative paths ('assets/...') so it works on GitHub Pages!
