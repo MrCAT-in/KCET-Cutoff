@@ -10,15 +10,16 @@ const categoryCheckboxesContainer = document.getElementById("categoryCheckboxesC
 const instantSearchBar = document.getElementById("instantSearchBar");
 const minRankInput = document.getElementById("minRankInput");
 const maxRankInput = document.getElementById("maxRankInput");
-const clearFiltersBtn = document.getElementById("clearFiltersBtn");
+const clearFiltersBtn = document.getElementById("clearFiltersBtn"); 
 
-// Event Listeners for new inputs
+// Event Listeners for inputs
 instantSearchBar.addEventListener('input', applySecondaryFilters);
 minRankInput.addEventListener('input', applySecondaryFilters);
 maxRankInput.addEventListener('input', applySecondaryFilters);
+
+// CLEAR FILTERS FUNCTION
 clearFiltersBtn.addEventListener('click', () => {
     instantSearchBar.value = '';
-
     minRankInput.value = '';
     maxRankInput.value = '';
 
@@ -41,7 +42,15 @@ fetchDataBtn.addEventListener("click", async() => {
     const profession = professionSelect.value; 
     const professionName = professionSelect.options[professionSelect.selectedIndex].text; 
 
-    const fileName = `assets/kcet_data/${year}/${round}/${profession}.json`;
+    // Validation check
+    if (year === "yearBlank" || round === "roundBlank" || region === "regionBlank" || profession === "courseBlank") {
+        searchResultContainer.style.display = 'flex';
+        resultsContainer.innerHTML = '<p class="no-results">Please select a Year, Round, Profession, and Region to begin your search.</p>';
+        return; 
+    }
+
+    // FIXED: kcet_data is now lowercase
+    const fileName = `./assets/kcet_data/${year}/${round}/${region}/${profession}.json`;
 
     searchResultContainer.style.display = 'flex';
     resultsContainer.innerHTML = '<div class="loader"></div>';
@@ -61,11 +70,9 @@ fetchDataBtn.addEventListener("click", async() => {
 
         allData = await response.json();
         
-        primaryContainerData = allData.filter(item => {
-            return region === 'regionBlank' ? true : item.Region === region;
-        });
+        // Data is already filtered by region via the folder structure
+        primaryContainerData = allData; 
         
-        // Generate dynamic filters
         generateCourseCheckboxes(primaryContainerData);
         generateCategoryCheckboxes(primaryContainerData);
         
@@ -77,7 +84,7 @@ fetchDataBtn.addEventListener("click", async() => {
             <div class="result-card" style="text-align: center; padding: 40px 20px;">
                 <h3 style="color: #d32f2f; margin-bottom: 10px;">Data Unavailable</h3>
                 <p style="color: #555; font-size: 1.1rem; line-height: 1.5;">
-                    The <strong>${professionName}</strong> cutoff data for <strong>${year} Round ${round}</strong> is missing or currently unavailable on the official KEA website.
+                    The <strong>${professionName}</strong> cutoff data for <strong>${year} Round ${round} (${region})</strong> is missing or currently unavailable.
                 </p>
             </div>
         `;
@@ -115,10 +122,10 @@ function generateCategoryCheckboxes(data) {
     const excludeKeys = ['College', 'Course', 'Region', 'Profession', 'Source_File'];
     const categoriesSet = new Set();
 
-    // Loop through all data to find every unique category key that actually has a value
     data.forEach(item => {
         for (const [key, value] of Object.entries(item)) {
-            if (!excludeKeys.includes(key) && value !== null && value !== "") {
+            // FIXED: Added value !== "--" check
+            if (!excludeKeys.includes(key) && value !== null && value !== "" && value !== "--") {
                 categoriesSet.add(key);
             }
         }
@@ -154,7 +161,6 @@ function applySecondaryFilters() {
     const checkedCourses = Array.from(document.querySelectorAll('.course-checkbox:checked')).map(cb => cb.value);
     const checkedCategories = Array.from(document.querySelectorAll('.category-checkbox:checked')).map(cb => cb.value);
     
-    // Get rank inputs, default to 0 and Infinity if empty
     const minRank = parseInt(minRankInput.value) || 0;
     const maxRank = parseInt(maxRankInput.value) || Infinity;
 
@@ -166,16 +172,15 @@ function applySecondaryFilters() {
         const excludeKeys = ['College', 'Course', 'Region', 'Profession', 'Source_File'];
 
         for (const [key, value] of Object.entries(item)) {
-            if (!excludeKeys.includes(key) && value !== null && value !== "") {
+            // FIXED: Added value !== "--" check
+            if (!excludeKeys.includes(key) && value !== null && value !== "" && value !== "--") {
                 const rankVal = parseInt(value);
                 
-                // If user checked specific categories, only look at those
                 const isCategoryChecked = checkedCategories.length === 0 || checkedCategories.includes(key);
 
-                // If it matches the category check AND falls between the min/max ranks
                 if (isCategoryChecked && rankVal >= minRank && rankVal <= maxRank) {
                     categoryRankMatch = true;
-                    break; // Stop looking, this college is a valid match!
+                    break; 
                 }
             }
         }
@@ -183,7 +188,6 @@ function applySecondaryFilters() {
         return textMatch && courseMatch && categoryRankMatch;
     });
 
-    // Pass the checked categories to renderResults so we can hide unwanted badges
     renderResults(finalData, checkedCategories);
 }
 
@@ -204,9 +208,9 @@ function renderResults(data, checkedCategories = []) {
         const excludeKeys = ['College', 'Course', 'Region', 'Profession', 'Source_File'];
         
         for (const [key, value] of Object.entries(item)) {
-            if (!excludeKeys.includes(key) && value !== null && value !== "") {
+            // FIXED: Added value !== "--" check
+            if (!excludeKeys.includes(key) && value !== null && value !== "" && value !== "--") {
                 
-                // UX UPGRADE: If categories are selected, ONLY show the selected category badges!
                 if (checkedCategories.length === 0 || checkedCategories.includes(key)) {
                     ranksHtml += `<span class="rank-badge"><strong>${key}:</strong> ${value}</span> `;
                 }
