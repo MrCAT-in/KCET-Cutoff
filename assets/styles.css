@@ -509,6 +509,12 @@ footer {
     font-size: 2.2rem;
 }
 
+.home-section h1 {
+    color: #111;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
 .home-section h3 {
     color: #333;
     margin: 25px 0 15px 0;
@@ -611,4 +617,9 @@ footer {
 
 .welcome-section{
     padding-bottom: 30px;
+}
+
+.explorerHeader{
+    text-align: center;
+    padding: 10px 0;
 }
