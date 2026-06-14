@@ -10,7 +10,8 @@ const categoryCheckboxesContainer = document.getElementById("categoryCheckboxesC
 const instantSearchBar = document.getElementById("instantSearchBar");
 const minRankInput = document.getElementById("minRankInput");
 const maxRankInput = document.getElementById("maxRankInput");
-const clearFiltersBtn = document.getElementById("clearFiltersBtn"); 
+const clearFiltersBtn = document.getElementById("clearFiltersBtn");
+const activeFiltersContainer = document.getElementById("activeFiltersContainer");
 
 // Event Listeners for inputs
 instantSearchBar.addEventListener('input', applySecondaryFilters);
@@ -60,6 +61,7 @@ fetchDataBtn.addEventListener("click", async() => {
     categoryCheckboxesContainer.innerHTML = '';
     minRankInput.value = '';
     maxRankInput.value = '';
+    activeFiltersContainer.innerHTML = '';
 
     try { 
         const response = await fetch(fileName);
@@ -172,10 +174,8 @@ function applySecondaryFilters() {
         const excludeKeys = ['College', 'Course', 'Region', 'Profession', 'Source_File'];
 
         for (const [key, value] of Object.entries(item)) {
-            // FIXED: Added value !== "--" check
             if (!excludeKeys.includes(key) && value !== null && value !== "" && value !== "--") {
                 const rankVal = parseInt(value);
-                
                 const isCategoryChecked = checkedCategories.length === 0 || checkedCategories.includes(key);
 
                 if (isCategoryChecked && rankVal >= minRank && rankVal <= maxRank) {
@@ -189,6 +189,63 @@ function applySecondaryFilters() {
     });
 
     renderResults(finalData, checkedCategories);
+
+    // NEW: Generate the visual tags
+    updateActiveFilterTags(searchTerm, checkedCourses, checkedCategories, minRankInput.value, maxRankInput.value);
+}
+
+// GENERATE ACTIVE FILTER TAGS
+function updateActiveFilterTags(searchTerm, courses, categories, minRank, maxRank) {
+    activeFiltersContainer.innerHTML = '';
+
+    // Helper function to build the tag HTML and attach the remove logic
+    const createTag = (text, onRemove) => {
+        const tag = document.createElement('div');
+        tag.className = 'filter-tag';
+        // Note: &times; is the HTML code for a clean 'X' symbol
+        tag.innerHTML = `<button class="remove-btn">&times;</button> <span>${text}</span>`;
+        tag.querySelector('.remove-btn').addEventListener('click', onRemove);
+        activeFiltersContainer.appendChild(tag);
+    };
+
+    // 1. Tag for Text Search
+    if (searchTerm) {
+        createTag(`Search: ${searchTerm}`, () => {
+            instantSearchBar.value = '';
+            applySecondaryFilters();
+        });
+    }
+
+    // 2. Tags for Courses
+    courses.forEach(course => {
+        createTag(course, () => {
+            document.getElementById(`course-${course}`).checked = false;
+            applySecondaryFilters();
+        });
+    });
+
+    // 3. Tags for Categories
+    categories.forEach(cat => {
+        createTag(cat, () => {
+            document.getElementById(`cat-${cat}`).checked = false;
+            applySecondaryFilters();
+        });
+    });
+
+    // 4. Tags for Ranks
+    if (minRank) {
+        createTag(`Min: ${minRank}`, () => {
+            minRankInput.value = '';
+            applySecondaryFilters();
+        });
+    }
+    
+    if (maxRank) {
+        createTag(`Max: ${maxRank}`, () => {
+            maxRankInput.value = '';
+            applySecondaryFilters();
+        });
+    }
 }
 
 // RENDER CARDS

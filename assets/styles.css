@@ -623,3 +623,40 @@ footer {
     text-align: center;
     padding: 10px 0;
 }
+
+/* =========================================
+   ACTIVE FILTER TAGS (Pills)
+========================================= */
+.active-filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.filter-tag {
+    display: inline-flex;
+    align-items: center;
+    background-color: #e0e0e0;
+    color: #0056b3; /* Dark blue text like the screenshot */
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.filter-tag .remove-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.2rem;
+    margin-right: 8px; /* Puts the 'x' on the left */
+    cursor: pointer;
+    padding: 0;
+    line-height: 0.8;
+    transition: color 0.2s;
+}
+
+.filter-tag .remove-btn:hover {
+    color: #d32f2f; /* Turns red when hovered */
+}
